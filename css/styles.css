@@ -1,0 +1,111 @@
+:root {
+    --light_gray: rgb(200, 200, 200);
+    --med_gray: rgb(150, 150, 150);
+    --dark_gray: rgb(100, 100, 100);
+
+    --blue: rgb(20, 75, 250);
+}
+
+body {
+    background-color: var(--light_gray);
+    user-select: none;
+}
+
+header div {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    background-color: green;
+    margin: 0 50px;
+    align-items: center;
+}
+
+/* header span {
+  border: 3px solid var(--med_gray);
+  box-shadow:  -2px -2px 5px rgb(225, 225, 225);
+  background:  radial-gradient(var(--light_gray) 40%, var(--med_gray) 80%);
+  padding: 5px;
+  border-radius:  50%;
+  margin: 2px;
+} */
+
+.circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.blue {
+    background-color: rgba(20, 75, 250, 0.8);
+    border: 5px solid rgba(20, 75, 200, 1);
+}
+
+.red {
+    background-color: rgba(255, 25, 0, 0.8);
+    border: 5px solid rgba(230, 25, 0, 1);
+}
+
+.game-board {
+    background-color: gold;
+    position: absolute;
+    width: 350px;
+    height: 330px;
+    display: grid;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    grid-gap: 2px;
+    grid-template-rows: repeat(6, 50px);
+    grid-template-columns: repeat(7, 50px);
+}
+
+.game-board:before {
+    content: "";
+    position: absolute;
+    background-color: var(--blue);
+    height: 330px;
+    width: 10px;
+    left: -10px;
+    top: 0;
+    box-shadow: 390px 0 0 var(--blue);
+}
+
+.game-board:after {
+    content: "";
+    position: absolute;
+    left: -60px;
+    bottom: 50%;
+    transform: translateX(50px);
+    transform: translateY(200px);
+    width: 400px;
+    border-bottom: 50px solid var(--blue);
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+}
+
+.hole {
+    position: relative;
+    background-color: var(--light_gray);
+    border: 1px solid black;
+    border-radius: 50%;
+    color: gray;
+    height: 32px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+#piece-display {
+    display: flex;
+    margin: 5px;
+}
+.curr-player:after {
+    content: "\002666";
+    font-size: 24px;
+/*     position: relative; */
+}
