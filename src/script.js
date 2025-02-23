@@ -5,6 +5,7 @@ const player2 = { name: "Player 1", color: "red" };
 const player1 = { name: "Player 2", color: "blue" };
 
 let currPlayer = player1;
+let gameWon = false
 
 const columns = [
     { column: 1, slots: [1, 8, 15, 22, 29, 36], pieces: 0 },
@@ -26,7 +27,7 @@ function newGame() {
     columns.forEach(column => {
         column.pieces = 0;
     })
-    console.log(columns)
+    gameWon = true
 }
 
 function switchPlayer() {
@@ -41,6 +42,9 @@ function getColumnNum(slot) {
 }
 
 function dropPiece(column) {
+    if (gameWon) {
+        return
+    }
     const chosenColumn = columns.find((col) => (col.column == column));
     if (chosenColumn.pieces >= 6) {
         console.warn("COLUMN IS FILLED");
