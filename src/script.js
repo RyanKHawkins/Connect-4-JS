@@ -17,6 +17,13 @@ const columns = [
     { column: 7, slots: [7, 14, 21, 28, 35, 42], pieces: 0 }
 ];
 
+let statsDict = JSON.parse(localStorage.getItem("Connect-4-JS.statsDict")) || {
+        redWins: 0,
+        blueWins: 0,
+        ties: 0
+    }
+localStorage.setItem("Connect-4-JS.statsDict", JSON.stringify(statsDict))
+
 
 function newGame() {
     slots.forEach(slot => {
@@ -58,7 +65,15 @@ function dropPiece(column) {
     let chosenSlot = document.getElementById(slotID);
     chosenSlot.innerHTML = `<div class="circle ${currPlayer.color}"></div>`
     chosenSlot.dataset.color = currPlayer.color;
-    checkForWin()
+    if (checkForWin() || isBoardFull()) {
+
+    }
+    if (isBoardFull() && !checkForWin()) {
+        statsDict = JSON.parse(localStorage.getItem("Connect-4-JS.statsDict"))
+        statsDict.ties++;
+        console.log(statsDict)
+        localStorage.setItem("Connect-4-JS.statsDict", JSON.stringify(statsDict))
+    }
 }
 
 function checkForWin() {
