@@ -97,3 +97,11 @@ slots.forEach((slot) => {
 function displayStats() {
     
 }
+
+function isBoardFull() {
+    return slots.every(slot => slot.dataset.color)
+}
+
+function isBeingUsed() {
+    return slots.some(slot => slot.dataset.color)
+}
