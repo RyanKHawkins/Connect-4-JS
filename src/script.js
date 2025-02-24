@@ -34,7 +34,7 @@ function newGame() {
     columns.forEach(column => {
         column.pieces = 0;
     })
-    gameWon = true
+    gameWon = false
 }
 
 function switchPlayer() {
@@ -66,7 +66,7 @@ function dropPiece(column) {
     chosenSlot.innerHTML = `<div class="circle ${currPlayer.color}"></div>`
     chosenSlot.dataset.color = currPlayer.color;
     if (checkForWin() || isBoardFull()) {
-
+        gameWon = true
     }
     if (isBoardFull() && !checkForWin()) {
         statsDict = JSON.parse(localStorage.getItem("Connect-4-JS.statsDict"))
