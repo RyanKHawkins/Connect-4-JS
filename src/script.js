@@ -6,6 +6,7 @@ const player1 = { name: "Player 2", color: "blue" };
 
 let currPlayer = player1;
 let gameWon = false
+let winner = ""
 
 const columns = [
     { column: 1, slots: [1, 8, 15, 22, 29, 36], pieces: 0 },
@@ -30,10 +31,12 @@ function newGame() {
         slot.dataset.color = "";
         slot.innerHTML = ""
         slot.innerText = slot.id
+        slot.classList = "hole"
     })
     columns.forEach(column => {
         column.pieces = 0;
     })
+    winner = ""
     gameWon = false
 }
 
@@ -77,9 +80,10 @@ function dropPiece(column) {
 }
 
 function checkForWin() {
-    checkForDiagonalWin()
-    checkForHorizontalWin()
+    // checkForDiagonalWin()
+    // checkForHorizontalWin()
     checkForVerticalWin()
+    return checkForVerticalWin()
 }
 function checkForDiagonalWin() {
     // Get upper left to lower right
@@ -91,7 +95,19 @@ function checkForHorizontalWin() {
     // Get each row
 }
 function checkForVerticalWin() {
-    // Get each column
+    for (const column of columns) {
+        for (let i = 0; i < 3; i++) {
+            let columnSection = column.slots.slice(i, i + 4);
+            columnSection = columnSection.map(slot => {
+                return document.getElementById(slot)
+            });
+            if (columnSection.every(slot => slot.dataset.color && slot.dataset.color == columnSection[0].dataset.color)) {
+                console.log("Win!!!");
+                columnSection.forEach(slot => slot.classList.add("winning-pieces"))
+                return true
+            }
+        }
+    }
 }
 
 let idNum = 1;
