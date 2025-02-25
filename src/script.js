@@ -60,6 +60,7 @@ function dropPiece(column) {
         console.warn("COLUMN IS FILLED");
         return
     }
+    switchPlayer();
     chosenColumn.pieces++;
     let filledSlots = Array.from(chosenColumn.slots.slice(-chosenColumn.pieces)).map(slot => {
         return document.getElementById(slot)
@@ -100,7 +101,6 @@ function checkForHorizontalWin() {
         for (let i = 0; i < 4; i++) {
             let rowSection = row.slice(i, i + 4);
             rowSection = rowSection.map(slot => document.getElementById(slot));
-            console.log("rowSection:  ", rowSection);
             if (rowSection.every(slot => slot.dataset.color && slot.dataset.color == rowSection[0].dataset.color)) {
                 rowSection.forEach(slot => slot.classList.add("winning-pieces"));
                 return true
@@ -135,9 +135,6 @@ slots.forEach((slot) => {
     slot.id = idNum;
     slot.dataset.column = getColumnNum(slot);
     slot.addEventListener("click", () => {
-        // slot.dataset.color = currPlayer.color;
-        // slot.style.backgroundColor = currPlayer.color;
-        switchPlayer();
         dropPiece(slot.dataset.column);
     });
 
