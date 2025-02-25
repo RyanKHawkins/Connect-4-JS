@@ -5,8 +5,9 @@ const player2 = { name: "Player 1", color: "red" };
 const player1 = { name: "Player 2", color: "blue" };
 
 let currPlayer = player1;
-let gameWon = false
+let gameOver = false
 let winner = ""
+
 
 const columns = [
     { column: 1, slots: [1, 8, 15, 22, 29, 36], pieces: 0 },
@@ -17,6 +18,18 @@ const columns = [
     { column: 6, slots: [6, 13, 20, 27, 34, 41], pieces: 0 },
     { column: 7, slots: [7, 14, 21, 28, 35, 42], pieces: 0 }
 ];
+
+let idNum = 1;
+slots.forEach((slot) => {
+    slot.innerText = idNum;
+    slot.id = idNum;
+    slot.dataset.column = getColumnNum(slot);
+    slot.addEventListener("click", () => {
+        dropPiece(slot.dataset.column);
+    });
+
+    idNum++;
+});
 
 let statsDict = JSON.parse(localStorage.getItem("Connect-4-JS.statsDict")) || {
         redWins: 0,
@@ -37,7 +50,7 @@ function newGame() {
         column.pieces = 0;
     })
     winner = ""
-    gameWon = false
+    gameOver = false
 }
 
 function switchPlayer() {
@@ -52,7 +65,7 @@ function getColumnNum(slot) {
 }
 
 function dropPiece(column) {
-    if (gameWon) {
+    if (gameOver) {
         return
     }
     const chosenColumn = columns.find((col) => (col.column == column));
@@ -70,7 +83,12 @@ function dropPiece(column) {
     chosenSlot.innerHTML = `<div class="circle ${currPlayer.color}"></div>`
     chosenSlot.dataset.color = currPlayer.color;
     if (checkForWin() || isBoardFull()) {
-        gameWon = true
+        gameOver = true;
+        if (checkForWin()) {
+            winner = currPlayer.name;
+            console.log(`${winner} won!`)            
+        }
+
     }
     if (isBoardFull() && !checkForWin()) {
         statsDict = JSON.parse(localStorage.getItem("Connect-4-JS.statsDict"))
@@ -129,17 +147,6 @@ function checkForVerticalWin() {
     }
 }
 
-let idNum = 1;
-slots.forEach((slot) => {
-    slot.innerText = idNum;
-    slot.id = idNum;
-    slot.dataset.column = getColumnNum(slot);
-    slot.addEventListener("click", () => {
-        dropPiece(slot.dataset.column);
-    });
-
-    idNum++;
-});
 
 function displayStats() {
     
@@ -147,8 +154,4 @@ function displayStats() {
 
 function isBoardFull() {
     return slots.every(slot => slot.dataset.color)
-}
-
-function isBeingUsed() {
-    return slots.some(slot => slot.dataset.color)
 }
