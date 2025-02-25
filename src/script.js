@@ -81,9 +81,33 @@ function dropPiece(column) {
 
 function checkForWin() {
     // checkForDiagonalWin()
-    // checkForHorizontalWin()
+    checkForHorizontalWin()
     checkForVerticalWin()
-    return checkForVerticalWin()
+    return checkForVerticalWin() || checkForHorizontalWin()
+}
+function checkForHorizontalWin() {
+    // Get each row
+    let columnsArray = columns.map(column => column.slots);
+    let rows = [];
+    for (let i = 0; i <= 5; i++) {
+        let row = [];
+        for (let j = 0; j < columnsArray.length; j++) {
+            row.push(columnsArray[j][i])
+        }
+        rows.push(row);
+    }
+    for (const row of rows) {
+        for (let i = 0; i < 4; i++) {
+            let rowSection = row.slice(i, i + 4);
+            rowSection = rowSection.map(slot => document.getElementById(slot));
+            console.log("rowSection:  ", rowSection);
+            if (rowSection.every(slot => slot.dataset.color && slot.dataset.color == rowSection[0].dataset.color)) {
+                rowSection.forEach(slot => slot.classList.add("winning-pieces"));
+                return true
+            }
+        }
+    }
+
 }
 function checkForDiagonalWin() {
     // Get upper left to lower right
@@ -91,18 +115,13 @@ function checkForDiagonalWin() {
     // Get lower left to upper right
     
 }
-function checkForHorizontalWin() {
-    // Get each row
-}
+
 function checkForVerticalWin() {
     for (const column of columns) {
         for (let i = 0; i < 3; i++) {
             let columnSection = column.slots.slice(i, i + 4);
-            columnSection = columnSection.map(slot => {
-                return document.getElementById(slot)
-            });
+            columnSection = columnSection.map(slot => document.getElementById(slot));
             if (columnSection.every(slot => slot.dataset.color && slot.dataset.color == columnSection[0].dataset.color)) {
-                console.log("Win!!!");
                 columnSection.forEach(slot => slot.classList.add("winning-pieces"))
                 return true
             }
