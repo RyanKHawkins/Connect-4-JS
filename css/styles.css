@@ -3,7 +3,11 @@
     --med_gray: rgb(150, 150, 150);
     --dark_gray: rgb(100, 100, 100);
 
-    --blue: rgb(20, 75, 250);
+    --blue: rgb(20, 75, 200);
+
+    --black-star: "\2605";
+    --white-star: "\2606";
+    
 }
 
 body {
@@ -36,7 +40,9 @@ header div {
     
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+
+    /* position: absolute */
 }
 
 .blue {
@@ -103,9 +109,17 @@ header div {
 #piece-display {
     display: flex;
     margin: 5px;
+    gap: 5px
 }
 .curr-player:after {
     content: "\002666";
     font-size: 24px;
+    color: rgba(50, 50, 50, .75);
 /*     position: relative; */
+}
+.winning-pieces:after {
+    content: var(--black-star);
+    font-size: 24px;
+    color: rgba(50, 50, 50, .75);
+    position: absolute;
 }
