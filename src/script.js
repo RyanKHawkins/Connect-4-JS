@@ -75,10 +75,7 @@ function dropPiece(column) {
     }
     switchPlayer();
     chosenColumn.pieces++;
-    let filledSlots = Array.from(chosenColumn.slots.slice(-chosenColumn.pieces)).map(slot => {
-        return document.getElementById(slot)
-    })
-    let slotID = [...chosenColumn.slots].reverse()[chosenColumn.pieces - 1]
+    let slotID = [...chosenColumn.slots].reverse()[chosenColumn.pieces - 1];
     let chosenSlot = document.getElementById(slotID);
     chosenSlot.innerHTML = `<div class="circle ${currPlayer.color}"></div>`
     chosenSlot.dataset.color = currPlayer.color;
