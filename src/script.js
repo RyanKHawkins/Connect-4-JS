@@ -144,7 +144,10 @@ function checkForHorizontalWin() {
             let rowSection = row.slice(i, i + 4);
             rowSection = rowSection.map(slot => document.getElementById(slot));
             if (rowSection.every(slot => slot.dataset.color && slot.dataset.color == rowSection[0].dataset.color)) {
-                rowSection.forEach(slot => slot.classList.add("winning-pieces"));
+                setTimeout(() => {
+                    rowSection.forEach(slot => slot.classList.add("winning-pieces"));                    
+                }, 250)
+
                 return true
             }
         }
@@ -164,7 +167,10 @@ function checkForVerticalWin() {
             let columnSection = column.slots.slice(i, i + 4);
             columnSection = columnSection.map(slot => document.getElementById(slot));
             if (columnSection.every(slot => slot.dataset.color && slot.dataset.color == columnSection[0].dataset.color)) {
-                columnSection.forEach(slot => slot.classList.add("winning-pieces"))
+                setTimeout(() => {
+                    columnSection.forEach(slot => slot.classList.add("winning-pieces"))                    
+                }, 250)
+
                 return true
             }
         }
