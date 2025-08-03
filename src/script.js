@@ -64,6 +64,32 @@ function getColumnNum(slot) {
     return columns.find((c) => c.slots.includes(Number(slot.id))).column;
 }
 
+function showDrop(column, slot) {
+    let emptySlotIDs = [...column.slots].reverse().slice(column.pieces).reverse();
+    console.log(emptySlotIDs)
+    console.log(slot)
+    let count = 0;
+
+    setInterval(() => {
+        if (count >= emptySlotIDs.length) {
+            return
+        }
+        console.log("count: ", count);
+        let slotElement = document.getElementById(emptySlotIDs[count]);
+        slotElement.innerHTML = `<div class="circle ${currPlayer.color}"></div>`
+        count++;
+        setTimeout(() => {slotElement.innerHTML = ""}, 50)
+        if (count < emptySlotIDs.length) {
+            setTimeout(() => {
+                document.getElementById(slot).innerHTML = `<div class="circle ${currPlayer. color}"></div>`
+
+            }, 250)
+        }
+    }, 50)
+    console.log("Empty slot IDs:  ", emptySlotIDs)
+    console.log("chosen slot:  ", slot)
+}
+
 function dropPiece(column) {
     if (gameOver) {
         return
@@ -77,6 +103,7 @@ function dropPiece(column) {
     chosenColumn.pieces++;
     let slotID = [...chosenColumn.slots].reverse()[chosenColumn.pieces - 1];
     let chosenSlot = document.getElementById(slotID);
+    // showDrop(chosenColumn, slotID);
     chosenSlot.innerHTML = `<div class="circle ${currPlayer.color}"></div>`
     chosenSlot.dataset.color = currPlayer.color;
     if (checkForWin() || isBoardFull()) {
