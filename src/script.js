@@ -3,6 +3,7 @@ const newButton = document.querySelector("#new-button");
 newButton.addEventListener("click", newGame);
 const player2 = { name: "Player 1", color: "red" };
 const player1 = { name: "Player 2", color: "blue" };
+const root = document.documentElement;
 
 let currPlayer = player1;
 let gameOver = false
@@ -55,8 +56,9 @@ function newGame() {
 
 function switchPlayer() {
     currPlayer = currPlayer == player1 ? player2 : player1;
-    document.querySelector("#blue-piece").classList.toggle("curr-player")
-    document.querySelector("#red-piece").classList.toggle("curr-player")
+    document.querySelector("#blue-piece").classList.toggle("curr-player");
+    document.querySelector("#red-piece").classList.toggle("curr-player");
+    root.style.setProperty("--player-color", currPlayer == player1 ? "var(--red)" : "var(--blue");
 }
 
 
