@@ -4,10 +4,12 @@
     --dark_gray: rgb(100, 100, 100);
 
     --blue: rgb(20, 75, 200);
+    --red: rgb(230, 25, 0);
 
     --black-star: "\2605";
     --white-star: "\2606";
     
+    --player-color: rgb(230, 25, 0);
 }
 
 body {
@@ -106,6 +108,10 @@ header div {
     align-items: center;
     justify-content: center
 }
+.hole:hover {
+    border: 2.5px solid var(--player-color);
+}
+
 #piece-display {
     display: flex;
     margin: 5px;
