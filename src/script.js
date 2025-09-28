@@ -59,7 +59,6 @@ function switchPlayer() {
     root.style.setProperty("--player-color", currPlayer.color);
     document.querySelector("#blue-piece").classList.toggle("curr-player");
     document.querySelector("#red-piece").classList.toggle("curr-player");
-    root.style.setProperty("--player-color", currPlayer == player1 ? "var(--red)" : "var(--blue");
 }
 
 
