@@ -56,6 +56,7 @@ function newGame() {
 
 function switchPlayer() {
     currPlayer = currPlayer == player1 ? player2 : player1;
+    root.style.setProperty("--player-color", currPlayer.color);
     document.querySelector("#blue-piece").classList.toggle("curr-player");
     document.querySelector("#red-piece").classList.toggle("curr-player");
     root.style.setProperty("--player-color", currPlayer == player1 ? "var(--red)" : "var(--blue");
