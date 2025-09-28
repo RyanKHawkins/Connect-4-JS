@@ -33,8 +33,8 @@ slots.forEach((slot) => {
 });
 
 let statsDict = JSON.parse(localStorage.getItem("Connect-4-JS.statsDict")) || {
-        redWins: 0,
-        blueWins: 0,
+        red: 0,
+        blue: 0,
         ties: 0
     }
 localStorage.setItem("Connect-4-JS.statsDict", JSON.stringify(statsDict))
