@@ -102,7 +102,6 @@ function dropPiece(column) {
         console.warn("COLUMN IS FILLED");
         return
     }
-    switchPlayer();
     chosenColumn.pieces++;
     let slotID = [...chosenColumn.slots].reverse()[chosenColumn.pieces - 1];
     let chosenSlot = document.getElementById(slotID);
@@ -118,6 +117,7 @@ function dropPiece(column) {
         }
 
     }
+    switchPlayer();
     if (isBoardFull() && !checkForWin()) {
         incrementStatsDictStat("ties");
         // statsDict = JSON.parse(localStorage.getItem("Connect-4-JS.statsDict"))
