@@ -1,8 +1,8 @@
 const slots = Array.from(document.querySelectorAll(".hole"));
 const newButton = document.querySelector("#new-button");
 newButton.addEventListener("click", newGame);
-const player2 = { name: "Player 1", color: "red" };
-const player1 = { name: "Player 2", color: "blue" };
+const player1 = { name: "Player 1", color: "red" };
+const player2 = { name: "Player 2", color: "blue" };
 const root = document.documentElement;
 
 let currPlayer = player1;
