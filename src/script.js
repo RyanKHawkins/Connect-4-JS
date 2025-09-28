@@ -112,15 +112,17 @@ function dropPiece(column) {
         gameOver = true;
         if (checkForWin()) {
             winner = currPlayer.name;
-            console.log(`${winner} won!`)            
+            console.log(`${winner} won!`);
+            incrementStatsDictStat(currPlayer == player1 ? "red" : "blue")
         }
 
     }
     if (isBoardFull() && !checkForWin()) {
-        statsDict = JSON.parse(localStorage.getItem("Connect-4-JS.statsDict"))
-        statsDict.ties++;
-        console.log(statsDict)
-        localStorage.setItem("Connect-4-JS.statsDict", JSON.stringify(statsDict))
+        incrementStatsDictStat("ties");
+        // statsDict = JSON.parse(localStorage.getItem("Connect-4-JS.statsDict"))
+        // statsDict.ties++;
+        // console.log(statsDict)
+        // localStorage.setItem("Connect-4-JS.statsDict", JSON.stringify(statsDict))
     }
 }
 
@@ -179,6 +181,26 @@ function checkForVerticalWin() {
     }
 }
 
+
+function incrementStatsDictStat(stat) {
+    statsDict = JSON.parse(localStorage.getItem("Connect-4-JS.statsDict"))
+    statsDict[stat]++;
+    console.log(`updated ${stat}`);
+    console.log(statsDict)
+    localStorage.setItem("Connect-4-JS.statsDict", JSON.stringify(statsDict))
+}
+
+function resetStatsDict() {
+    localStorage.removeItem("Connect-4-JS.statsDict");
+    console.log("resetting win stats");
+    statsDict = {
+        red: 0,
+        blue: 0,
+        ties: 0
+    }
+    localStorage.setItem("Connect-4-JS.statsDict", JSON.stringify(statsDict));
+    console.log(localStorage.getItem("Connect-4-JS.statsDict"))
+}
 
 function displayStats() {
     
